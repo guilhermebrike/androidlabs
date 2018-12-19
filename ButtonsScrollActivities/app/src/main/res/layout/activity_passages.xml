@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".passagesActivity"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/article_heading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        android:textAlignment="center"/>
+
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+        <TextView
+          android:id="@+id/passages1"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:autoLink="web"
+          android:visibility="invisible"
+          android:text="@string/abbeyRoad" />
+
+        <TextView
+            android:id="@+id/passages2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:autoLink="web"
+            android:visibility="invisible"
+            android:text="@string/whiteAlbum" />
+        <TextView
+            android:id="@+id/passages3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:autoLink="web"
+            android:visibility="invisible"
+            android:text="@string/sgtPeppers"/>
+
+        </android.support.constraint.ConstraintLayout>
+    </ScrollView>
+
+
+
+</LinearLayout>

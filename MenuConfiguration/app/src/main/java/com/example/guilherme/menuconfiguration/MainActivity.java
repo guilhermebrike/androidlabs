@@ -110,6 +110,9 @@ public class MainActivity extends AppCompatActivity {
     private void toast(String message){
         Toast.makeText(this,message,Toast.LENGTH_LONG).show();
     }
+
+
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){

@@ -1,22 +1,16 @@
 package com.derrick.park.assignment3_contacts.activities;
 
-import android.content.Context;
+
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.TextView;
-import android.widget.Toast;
-
 import com.derrick.park.assignment3_contacts.R;
 import com.derrick.park.assignment3_contacts.models.Contact;
 import com.derrick.park.assignment3_contacts.models.ContactList;

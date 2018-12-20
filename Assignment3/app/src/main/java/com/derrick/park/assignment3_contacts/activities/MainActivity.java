@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.derrick.park.assignment3_contacts.R;
@@ -23,7 +24,13 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
     private ArrayList<Contact> mContactList;
+
     public static final String TAG = MainActivity.class.getSimpleName();
+
+    private TextView mNametv;
+
+    private TextView mPhonetv;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<ContactList> call, Response<ContactList> response) {
                 if (response.isSuccessful()) {
-                     mContactList = response.body().getContactList();
+                    mContactList = response.body().getContactList();
                      for(Contact contact: mContactList) {
                          Log.d(TAG, "onResponse: " + mContactList.size());
                          Log.d(TAG, "onResponse: " + contact);
@@ -48,11 +55,6 @@ public class MainActivity extends AppCompatActivity {
                 // Error Handling
             }
         });
-
-
-
-        
-
 
 
 

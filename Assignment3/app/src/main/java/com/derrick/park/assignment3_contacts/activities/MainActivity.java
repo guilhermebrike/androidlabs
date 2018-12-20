@@ -55,6 +55,19 @@ public class MainActivity extends AppCompatActivity {
 
                     Collections.sort(mContactList);
 
+                    // set header property of mContactList
+                    String currentFirst_letter ="";
+                    String contactFirstLetter = "";
+                    for (Contact c: mContactList) {
+                        contactFirstLetter = c.getName().getFirst().substring(0,1).toUpperCase();
+                        if (!contactFirstLetter.equals(currentFirst_letter)) {
+                            currentFirst_letter = contactFirstLetter;
+                            c.setHeaderTrue();
+                        }else{
+                            c.setHeaderFalse();
+                        }
+                    }
+
                     // Get a handle to the RecyclerView.
                     mRecyclerView = findViewById(R.id.recycler_view);
 
@@ -104,24 +117,40 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
+        String nameResult ="";
+        String phoneResult = "";
         if (requestCode == TEXT_REQUEST) {
             if (resultCode == RESULT_OK) {
                 Bundle extras = data.getExtras();
-                String nameResult = extras.getString("EXTRA_CONTACT_NAME");
-                String phoneResult = extras.getString("EXTRA_CONTACT_PHONE");
+                nameResult = extras.getString("EXTRA_CONTACT_NAME");
+                phoneResult = extras.getString("EXTRA_CONTACT_PHONE");
                 Log.d(TAG, "onActivityResult: WORKED");
+
+                Contact c1 = new Contact();
+                String[] arrayOfString = nameResult.split("\\s+");
+                c1.setName(arrayOfString[0],arrayOfString[1]);
+                c1.setCell(phoneResult);
+
+                mContactList.add(c1);
+                Collections.sort(mContactList);
+                String currentFirst_letter ="";
+                String contactFirstLetter = "";
+                for (Contact c: mContactList) {
+                    contactFirstLetter = c.getName().getFirst().substring(0,1).toUpperCase();
+                    if (!contactFirstLetter.equals(currentFirst_letter)) {
+                        currentFirst_letter = contactFirstLetter;
+                        c.setHeaderTrue();
+                    }else{
+                        c.setHeaderFalse();
+                    }
+                }
+
+                Log.d(TAG, "onActivityResult: ");
+                mRecyclerView.getAdapter().notifyDataSetChanged();
+                // Scroll to the bottom.
+                mRecyclerView.smoothScrollToPosition(mContactList.size());
             }
         }
-
-        Contact c1 = new Contact();
-        c1.setName("Gui","W");
-        c1.setCell("123131231");
-        mContactList.add(c1);
-        Collections.sort(mContactList);
-        mRecyclerView.getAdapter().notifyItemInserted(mContactList.size());
-        // Scroll to the bottom.
-        mRecyclerView.smoothScrollToPosition(mContactList.size());
     }
 }
 

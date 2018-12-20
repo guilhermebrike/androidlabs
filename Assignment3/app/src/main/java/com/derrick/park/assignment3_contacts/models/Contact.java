@@ -20,6 +20,8 @@ public class Contact implements Comparable<Contact>{
     @Expose
     private String cell;
 
+    private boolean header = false;
+
     public String getGender() {
         return gender;
     }
@@ -52,10 +54,21 @@ public class Contact implements Comparable<Contact>{
         this.cell = phone;
     }
 
+    public boolean isHeader(){
+        return header;
+    }
+
+    public void setHeaderTrue(){
+        header = true;
+    }
+
+    public void setHeaderFalse(){
+        header = false;
+    }
 
     @Override
     public String toString() {
-        return String.format("%n%s%n%s%n%s%n%s", name, location, email, cell);
+        return String.format("%n%s%n%s%n%s%n%s%n%s", name, location, email, cell, Boolean.toString(header));
     }
 
     @Override

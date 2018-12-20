@@ -67,7 +67,5 @@ public class SecondActivity extends AppCompatActivity {
 
         // finish to close the activity
         finish();
-
-
     }
 }

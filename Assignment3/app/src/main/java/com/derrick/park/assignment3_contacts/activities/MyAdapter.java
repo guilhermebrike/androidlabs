@@ -16,24 +16,24 @@ import java.util.LinkedList;
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.WordViewHolder> {
 
     private ArrayList<Contact> mContactList;
-    private LayoutInflater mInflater;
 
-    public MyAdapter(Context context, ArrayList<Contact> contactList) {
-        mInflater = LayoutInflater.from(context);
+    public MyAdapter( ArrayList<Contact> contactList) {
         this.mContactList = contactList;
     }
 
     @NonNull
     @Override
     public MyAdapter.WordViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View mItemView = mInflater.inflate(R.layout.layout_contacts, parent, false);
+        View mItemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_contacts, parent, false);
         return new WordViewHolder(mItemView, this);
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyAdapter.WordViewHolder holder, int position) {
-        String mPhoneNumber = mContactList.get(position).getCell();
-        holder.mPhoneNumber.setText(mPhoneNumber);
+        String mNameString = mContactList.get(position).getName().toString();
+        String mPhoneNumberString = mContactList.get(position).getCell();
+        holder.mName.setText(mNameString);
+        holder.mPhoneNumber.setText(mPhoneNumberString);
     }
 
     @Override
@@ -44,11 +44,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.WordViewHolder> {
 
     class WordViewHolder extends RecyclerView.ViewHolder {
 
+        public final TextView mName;
         public final TextView mPhoneNumber;
         final MyAdapter mAdapter;
 
         public WordViewHolder(View itemView, MyAdapter adapter) {
             super(itemView);
+            mName = itemView.findViewById(R.id.item_name);
             mPhoneNumber = itemView.findViewById(R.id.item_phone_number);
             this.mAdapter = adapter;
         }

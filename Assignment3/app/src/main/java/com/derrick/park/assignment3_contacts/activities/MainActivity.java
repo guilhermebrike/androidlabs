@@ -20,6 +20,7 @@ import com.derrick.park.assignment3_contacts.models.ContactList;
 import com.derrick.park.assignment3_contacts.network.ContactClient;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -28,7 +29,6 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity {
     private ArrayList<Contact> mContactList;
 
-    private Context mContext = this;
 
     public static final String TAG = MainActivity.class.getSimpleName();
 
@@ -38,38 +38,35 @@ public class MainActivity extends AppCompatActivity {
     // My Adapter
     private MyAdapter mAdapter;
 
-
-
-    private TextView mNametv;
-
-    private TextView mPhonetv;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Call<ContactList> call = ContactClient.getContacts(10);
+        Call<ContactList> call = ContactClient.getContacts(100);
 
         call.enqueue(new Callback<ContactList>() {
             @Override
             public void onResponse(Call<ContactList> call, Response<ContactList> response) {
                 if (response.isSuccessful()) {
 
+                    // getting Contacts from the API
                     mContactList = response.body().getContactList();
+
+                    // I have to sort my names inside my list
+
+                    Collections.sort(mContactList);
+
                     // Get a handle to the RecyclerView.
                     mRecyclerView = findViewById(R.id.recycler_view);
+
                     // Create an adapter and supply the data to be displayed.
-                    mAdapter = new MyAdapter(mContext, mContactList);
+                    mAdapter = new MyAdapter(mContactList);
+
                     // Connect the adapter with the RecyclerView.
                     mRecyclerView.setAdapter(mAdapter);
-                    // Give the RecyclerView a default layout manager.
-                    mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
 
-                     for(Contact contact: mContactList) {
-                         Log.d(TAG, "onResponse: " + mContactList.size());
-                         Log.d(TAG, "onResponse: " + contact);
-                     }
+                    // Give the RecyclerView a default layout manager.
+                    mRecyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
                 }
             }
 
@@ -78,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
                 // Error Handling
             }
         });
+
 
 
 

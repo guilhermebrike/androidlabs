@@ -79,7 +79,6 @@ public class MainActivity extends AppCompatActivity {
 
         //startActivity(intent);
 
-
         startActivityForResult(intent, TEXT_REQUEST);
     }
 

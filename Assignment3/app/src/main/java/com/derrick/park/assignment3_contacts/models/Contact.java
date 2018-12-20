@@ -3,7 +3,7 @@ package com.derrick.park.assignment3_contacts.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Contact {
+public class Contact implements Comparable<Contact>{
     @SerializedName("gender")
     @Expose
     private String gender;
@@ -45,10 +45,15 @@ public class Contact {
         return String.format("%n%s%n%s%n%s%n%s", name, location, email, cell);
     }
 
+    @Override
+    public int compareTo(Contact o) {
+        return name.toString().compareTo(o.name.toString());
+    }
+
     /**
      * Name {first: , last: }
      */
-    class Name {
+   public static class Name {
         @SerializedName("first")
         @Expose
         private String first;

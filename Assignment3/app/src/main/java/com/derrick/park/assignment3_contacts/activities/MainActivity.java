@@ -1,7 +1,10 @@
 package com.derrick.park.assignment3_contacts.activities;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Menu;
@@ -25,7 +28,17 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity {
     private ArrayList<Contact> mContactList;
 
+    private Context mContext = this;
+
     public static final String TAG = MainActivity.class.getSimpleName();
+
+    // My ReclycerView
+    private RecyclerView mRecyclerView;
+
+    // My Adapter
+    private MyAdapter mAdapter;
+
+
 
     private TextView mNametv;
 
@@ -42,7 +55,17 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<ContactList> call, Response<ContactList> response) {
                 if (response.isSuccessful()) {
+
                     mContactList = response.body().getContactList();
+                    // Get a handle to the RecyclerView.
+                    mRecyclerView = findViewById(R.id.recycler_view);
+                    // Create an adapter and supply the data to be displayed.
+                    mAdapter = new MyAdapter(mContext, mContactList);
+                    // Connect the adapter with the RecyclerView.
+                    mRecyclerView.setAdapter(mAdapter);
+                    // Give the RecyclerView a default layout manager.
+                    mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
+
                      for(Contact contact: mContactList) {
                          Log.d(TAG, "onResponse: " + mContactList.size());
                          Log.d(TAG, "onResponse: " + contact);
@@ -55,7 +78,6 @@ public class MainActivity extends AppCompatActivity {
                 // Error Handling
             }
         });
-
 
 
 

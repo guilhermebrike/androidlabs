@@ -40,6 +40,19 @@ public class Contact implements Comparable<Contact>{
         return cell;
     }
 
+    public void setName(String first,String last){
+        Name n1 = new Name();
+        n1.setFirst(first);
+        n1.setLast(last);
+        this.name = n1;
+
+    }
+
+    public void setCell(String phone){
+        this.cell = phone;
+    }
+
+
     @Override
     public String toString() {
         return String.format("%n%s%n%s%n%s%n%s", name, location, email, cell);
@@ -47,7 +60,7 @@ public class Contact implements Comparable<Contact>{
 
     @Override
     public int compareTo(Contact o) {
-        return name.toString().compareTo(o.name.toString());
+        return name.toString().toLowerCase().compareTo(o.name.toString().toLowerCase());
     }
 
     /**
@@ -67,6 +80,14 @@ public class Contact implements Comparable<Contact>{
 
         public String getLast() {
             return last;
+        }
+
+        public void setFirst(String first){
+            this.first = first;
+        }
+
+        public void setLast(String last){
+            this.last = last;
         }
 
         @Override

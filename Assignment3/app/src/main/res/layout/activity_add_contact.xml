@@ -10,16 +10,20 @@
     android:gravity="center">
 
     <EditText
+        android:id="@+id/et_add_name"
         android:hint="First Last"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <EditText
+        android:id="@+id/et_add_phone"
         android:hint="Phone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <Button
+        android:id="@+id/btn_add_contact"
+        android:onClick="returnNewContact"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Submit"/>

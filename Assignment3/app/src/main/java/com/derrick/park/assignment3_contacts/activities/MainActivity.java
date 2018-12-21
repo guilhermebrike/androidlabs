@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Call<ContactList> call = ContactClient.getContacts(10);
+        Call<ContactList> call = ContactClient.getContacts(50);
 
         call.enqueue(new Callback<ContactList>() {
             @Override
@@ -56,17 +56,7 @@ public class MainActivity extends AppCompatActivity {
                     Collections.sort(mContactList);
 
                     // set header property of mContactList
-                    String currentFirst_letter ="";
-                    String contactFirstLetter = "";
-                    for (Contact c: mContactList) {
-                        contactFirstLetter = c.getName().getFirst().substring(0,1).toUpperCase();
-                        if (!contactFirstLetter.equals(currentFirst_letter)) {
-                            currentFirst_letter = contactFirstLetter;
-                            c.setHeaderTrue();
-                        }else{
-                            c.setHeaderFalse();
-                        }
-                    }
+                    setHeaders();
 
                     // Get a handle to the RecyclerView.
                     mRecyclerView = findViewById(R.id.recycler_view);
@@ -133,17 +123,8 @@ public class MainActivity extends AppCompatActivity {
 
                 mContactList.add(c1);
                 Collections.sort(mContactList);
-                String currentFirst_letter ="";
-                String contactFirstLetter = "";
-                for (Contact c: mContactList) {
-                    contactFirstLetter = c.getName().getFirst().substring(0,1).toUpperCase();
-                    if (!contactFirstLetter.equals(currentFirst_letter)) {
-                        currentFirst_letter = contactFirstLetter;
-                        c.setHeaderTrue();
-                    }else{
-                        c.setHeaderFalse();
-                    }
-                }
+                setHeaders();
+
 
                 Log.d(TAG, "onActivityResult: ");
                 mRecyclerView.getAdapter().notifyDataSetChanged();
@@ -152,5 +133,20 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+
+    private void setHeaders(){
+        String currentFirst_letter ="";
+        String contactFirstLetter = "";
+        for (Contact c: mContactList) {
+            contactFirstLetter = c.getName().getFirst().substring(0,1).toUpperCase();
+            if (!contactFirstLetter.equals(currentFirst_letter)) {
+                currentFirst_letter = contactFirstLetter;
+                c.setHeaderTrue();
+            }else{
+                c.setHeaderFalse();
+            }
+        }
+    }
+
 }
 

@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">ローカライゼーション</string>
+    <string name="greeting">こんにちは世界</string>
+</resources>

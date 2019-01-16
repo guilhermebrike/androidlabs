@@ -11,9 +11,13 @@ import android.os.SystemClock;
 import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.Toast;
 import android.widget.ToggleButton;
+
+import java.util.Date;
+
 public class MainActivity extends AppCompatActivity {
 
     // Notification ID.
@@ -22,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String PRIMARY_CHANNEL_ID =
             "primary_notification_channel";
     private NotificationManager mNotificationManager;
+
 
     /**
      * Initializes the activity.
@@ -127,5 +132,17 @@ public class MainActivity extends AppCompatActivity {
                     "stand up and walk");
             mNotificationManager.createNotificationChannel(notificationChannel);
         }
+    }
+
+    public void showNextAlarm(View view) {
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+
+        Long nextTime = alarmManager.getNextAlarmClock().getTriggerTime();
+
+        Date nextAlarmDate = new Date(nextTime);
+
+        Toast.makeText(MainActivity.this, nextAlarmDate.toString(),
+                Toast.LENGTH_LONG).show();
+
     }
 }

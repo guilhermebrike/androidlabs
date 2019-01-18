@@ -30,6 +30,10 @@ public class MainActivity extends AppCompatActivity {
 
     private NotificationManager mManager;
 
+    public void deleteAction(View view) {
+            mManager.deleteNotificationChannel(PRIMARY_CHANNEL_ID);
+    }
+
 
     public class NotificationReceiver extends BroadcastReceiver{
         public NotificationReceiver(){

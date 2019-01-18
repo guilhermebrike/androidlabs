@@ -30,6 +30,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.WordViewHolder> {
     public void onBindViewHolder(@NonNull MyAdapter.WordViewHolder holder, int position) {
 
         String currentFirst_letter = mContactList.get(position).getName().getFirst().substring(0,1).toUpperCase();
+
         if (mContactList.get(position).isHeader()){
             holder.mFirstLetter.setText(currentFirst_letter);
             holder.mFirstLetter.setVisibility(View.VISIBLE);
